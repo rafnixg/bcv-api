@@ -11,9 +11,9 @@ def get_rate(db: Session) -> models.Rate:
     """Get the last rate from the database."""
     return db.query(models.Rate).order_by(models.Rate.date.desc()).first()
 
-def get_rate_from_date(db: Session, date: date) -> models.Rate:
+def get_rate_from_date(db: Session, rate_date: date) -> models.Rate:
     """Get the rate from the database for a specific date."""
-    return db.query(models.Rate).filter(models.Rate.date == date).order_by(models.Rate.id.desc()).first()
+    return db.query(models.Rate).filter(models.Rate.date == rate_date).order_by(models.Rate.id.desc()).first()
 
 def get_rates(db: Session, skip: int = 0, limit: int = 100) -> List[models.Rate]:
     """Get all rates from the database."""
