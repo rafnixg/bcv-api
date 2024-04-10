@@ -1,4 +1,4 @@
-# BCV Exchange Rate API [WIP]
+# BCV Exchange Rate API
 
 [BCV API DEMO](https://bcv-api-main-fc042a8.d2.zuplo.dev/)
 
