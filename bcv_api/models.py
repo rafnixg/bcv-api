@@ -15,7 +15,8 @@ class User(Base):
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
     api_key = Column(String)
-
+    requests = Column(Integer, default=0)
+    max_requests = Column(Integer, default=10)
 
 
 class Rate(Base):

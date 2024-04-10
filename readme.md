@@ -35,19 +35,8 @@ pip install -r requirements.txt
 ```bash
 uvicorn bcv_api.main:app --reload
 ```
+6. Open your browser and go to http://localhost:8000
 
-## Endpoints
-- `/` [GET]: Returns the exchange rate of the BCV in JSON format for today.
-- `/<date>` [GET]: Returns the exchange rate of the BCV in JSON format for the specified date. The date must be in the format `YYYY-MM-DD`.
-- `/` [POST]: Returns the exchange rate of the BCV in JSON format for today.
-
-## Example
-```json
-{
-    "date": "2021-08-10",
-    "dollar": 32.12
-}
-```
 
 ## Built With
 - [Python](https://www.python.org/)

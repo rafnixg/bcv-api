@@ -20,6 +20,16 @@ class User(BaseModel):
     api_key: str
     id: int
 
+    class Config:
+        orm_mode = True
+
+
+class UserCreate(BaseModel):
+    """User creation model."""
+
+    email: str
+    password: str
+
 
 class Rate(BaseModel):
     """Rate model."""
@@ -30,3 +40,16 @@ class Rate(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class Token(BaseModel):
+    """Token model."""
+
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    """Token data model."""
+
+    email: str | None = None
