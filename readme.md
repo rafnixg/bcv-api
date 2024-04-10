@@ -1,11 +1,10 @@
 # BCV Exchange Rate API [WIP]
 
-https://bcv-api.rafnixg.dev
+[BCV API DEMO](https://bcv-api-main-fc042a8.d2.zuplo.dev/)
 
 ## Documentation
 
-- Swagger UI: https://bcv-api.rafnixg.dev/docs
-- OpenAPI: https://bcv-api.rafnixg.dev/openapi.json
+[https://bcv-api-main-fc042a8.d2.zuplo.dev/docs](https://bcv-api-main-fc042a8.d2.zuplo.dev/docs)
 
 ## Description
 This API is used to get the exchange rate of the BCV (Central Bank of Venezuela).
