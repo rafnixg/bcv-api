@@ -1,23 +1,42 @@
-name: Docker Image CI
+name: Publish Docker Image
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-
   build:
-
+    name: Build and push Docker image
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      packages: write
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile.newrelic --tag bcv-api:$(date +%s)
-    - name: Push the Docker image
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-    - run: docker tag bcv-api:$(date +%s) ghcr.io/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]' | sed 's/[\/]/\//g'):$(date +%s)
-    - run: docker push ghcr.io/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]' | sed 's/[\/]/\//g'):$(date +%s)
+      - name: Check out the repo
+        uses: actions/checkout@v4
 
+      - name: Log in to Docker Hub
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        with:
+          context: .
+          file: ./Dockerfile.newrelic
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
