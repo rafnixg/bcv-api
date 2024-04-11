@@ -1,0 +1,12 @@
+site_name: BCV Exchange Rate API
+theme:
+  name: material
+  language: en
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil 
+    view: material/eye
+  features:
+    - content.action.edit
+repo_url: https://github.com/rafnixg/bcv-api
+edit_uri: edit/main/docs/
