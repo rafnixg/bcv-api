@@ -1,0 +1,12 @@
+FROM python:3.10
+
+WORKDIR /code
+
+COPY ./requirements.txt /code/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN pip install --no-cache-dir newrelic
+
+COPY ./bcv_api /code/bcv_api
+COPY ./newrelic.ini /code/newrelic.ini
+
+CMD ["newrelic-admin", "run-program", "uvicorn", "bcv_api.main:app", "--host", "0.0.0.0", "--port", "8000"]
