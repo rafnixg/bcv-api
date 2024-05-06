@@ -2,10 +2,12 @@ FROM python:3.10
 
 WORKDIR /code
 
+RUN pip install opentelemetry-distro opentelemetry-exporter-otlp
+RUN opentelemetry-bootstrap -a install
+
 COPY ./requirements.txt /code/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 # RUN pip install --no-cache-dir newrelic
-
 COPY ./bcv_api /code/bcv_api
 
 
