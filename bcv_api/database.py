@@ -7,7 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from bcv_api.config import settings
 
 engine = create_engine(
-    settings.sql_alchemy_database_url, connect_args={"check_same_thread": False}
+    settings.sql_alchemy_database_url
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

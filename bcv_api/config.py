@@ -40,7 +40,7 @@ class Settings(BaseSettings):
     secret_key: str
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
-    sql_alchemy_database_url: str = "sqlite:///./sql_app.db"
+    sql_alchemy_database_url: str = "postgresql://clvlkavnu0000adnyhjzhh53u:WgSqN75nGaMO7x90zP8nzHiR@192.168.18.103:9000/bcv-api"
     max_requests: int = 10
 
 

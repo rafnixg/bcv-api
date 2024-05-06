@@ -1,0 +1,22 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: FastAPI",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "bcv_api.main:app",
+                "--reload"
+            ],
+            "env": {
+                "SQLALCHEMY_DATABASE_URI": "postgresql://clvlkavnu0000adnyhjzhh53u:WgSqN75nGaMO7x90zP8nzHiR@192.168.18.103:9000/bcv-api"
+            },
+            "jinja": true
+        }
+    ]
+}
