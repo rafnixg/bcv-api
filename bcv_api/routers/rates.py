@@ -28,6 +28,8 @@ def read_exchange_rate(db: Session = Depends(depends.get_db)) -> schemas.Exchang
     """
 
     rate = services.get_rate(db)
+    if rate is None:
+        raise HTTPException(status_code=404, detail="No rates found.")
     return schemas.ExchangeRate(dollar=rate.dollar, date=rate.date)
 
 
