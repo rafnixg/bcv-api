@@ -1,5 +1,5 @@
 # BCV Exchange Rate API
-
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/rafnixg/bcv-api)
 ## Documentation
 
 [https://rafnixg.github.io/bcv-api/](https://rafnixg.github.io/bcv-api/)
