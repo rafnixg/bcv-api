@@ -1,4 +1,5 @@
 # BCV Exchange Rate API
+[![Publish Docker Image](https://github.com/rafnixg/bcv-api/actions/workflows/docker-image.yml/badge.svg?branch=main)](https://github.com/rafnixg/bcv-api/actions/workflows/docker-image.yml)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/rafnixg/bcv-api)
 ## Documentation
 
