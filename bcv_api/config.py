@@ -5,6 +5,8 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     """Settings for the FastAPI app."""
+    
+    model_config = {"env_file": ".env", "extra": "ignore"}
 
     app_name: str = "BCV API"
     summary: str = "API to get the exchange rate for USD from the BCV"

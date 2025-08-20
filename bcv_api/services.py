@@ -67,6 +67,31 @@ def get_rates(db: Session, skip: int = 0, limit: int = 100) -> List[models.Rate]
     return db.query(models.Rate).offset(skip).limit(limit).all()
 
 
+def get_rates_by_date_range(db: Session, start_date: date, end_date: date) -> List[models.Rate]:
+    """Get rates from the database within a date range.
+
+    Parameters:
+    ----------
+    db: Session
+        Database session.
+    start_date: date
+        Start date of the range.
+    end_date: date
+        End date of the range.
+
+    Returns:
+    -------
+    List[models.Rate]
+    """
+    return (
+        db.query(models.Rate)
+        .filter(models.Rate.date >= start_date)
+        .filter(models.Rate.date <= end_date)
+        .order_by(models.Rate.date.desc())
+        .all()
+    )
+
+
 def create_rate(db: Session, rate: schemas.Rate) -> models.Rate:
     """Create a new rate in the database.
 
