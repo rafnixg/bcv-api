@@ -5,6 +5,8 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     """Settings for the FastAPI app."""
+    
+    model_config = {"env_file": ".env", "extra": "ignore"}
 
     app_name: str = "BCV API"
     summary: str = "API to get the exchange rate for USD from the BCV"
@@ -13,6 +15,7 @@ class Settings(BaseSettings):
     - / [GET]: Get the exchange rate for USD from the database.
     - / [POST] Create a new rate in the database using the BCV API.
     - /{rate_date} [GET]: Get the rate for a specific date from the database.
+    - /history [GET]: Get the exchange rate history within a date range.
     - /token [POST]: Login endpoint to get a JWT token.
     - /users/me [GET]: Get the current user information.
     """

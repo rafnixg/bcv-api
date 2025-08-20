@@ -1,6 +1,7 @@
 """Schemas for the API."""
 
 from datetime import date
+from typing import List
 from pydantic import BaseModel
 
 
@@ -9,6 +10,14 @@ class ExchangeRate(BaseModel):
 
     dollar: float
     date: date
+
+
+class ExchangeRateHistory(BaseModel):
+    """Exchange rate history response."""
+
+    start_date: date
+    end_date: date
+    rates: List[ExchangeRate]
 
 
 class User(BaseModel):

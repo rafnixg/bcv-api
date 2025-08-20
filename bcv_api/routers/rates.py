@@ -1,9 +1,9 @@
 """Rates endpoints."""
 
-from datetime import date
-from typing import Annotated
+from datetime import date, timedelta
+from typing import Annotated, Optional
 
-from fastapi import Depends, HTTPException
+from fastapi import Depends, HTTPException, Query
 
 from fastapi import APIRouter
 from sqlalchemy.orm import Session
@@ -31,6 +31,53 @@ def read_exchange_rate(db: Session = Depends(depends.get_db)) -> schemas.Exchang
     if rate is None:
         raise HTTPException(status_code=404, detail="No rates found.")
     return schemas.ExchangeRate(dollar=rate.dollar, date=rate.date)
+
+
+@router.get("/history")
+def read_exchange_rate_history(
+    start_date: Optional[date] = Query(None, description="Start date (YYYY-MM-DD format)"),
+    end_date: Optional[date] = Query(None, description="End date (YYYY-MM-DD format)"),
+    db: Session = Depends(depends.get_db)
+) -> schemas.ExchangeRateHistory:
+    """# Get the exchange rate history within a date range.
+
+    This endpoint returns the exchange rate history for USD within a date range.
+    If no dates are provided, returns the last month's data.
+
+    Parameters:
+    ----------
+    start_date: date, optional
+        Start date of the range (format: YYYY-MM-DD)
+    end_date: date, optional
+        End date of the range (format: YYYY-MM-DD)
+
+    Returns:
+    -------
+    schemas.ExchangeRateHistory
+    """
+    # If no dates provided, default to last month
+    if start_date is None or end_date is None:
+        end_date = date.today()
+        start_date = end_date - timedelta(days=30)
+    
+    # Validate date range
+    if start_date > end_date:
+        raise HTTPException(status_code=400, detail="Start date must be before or equal to end date")
+    
+    # Get rates from database
+    rates = services.get_rates_by_date_range(db, start_date, end_date)
+    
+    # Convert to schema format
+    exchange_rates = [
+        schemas.ExchangeRate(dollar=rate.dollar, date=rate.date) 
+        for rate in rates
+    ]
+    
+    return schemas.ExchangeRateHistory(
+        start_date=start_date,
+        end_date=end_date,
+        rates=exchange_rates
+    )
 
 
 @router.get("/{rate_date}")
