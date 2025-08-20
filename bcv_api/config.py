@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     - / [GET]: Get the exchange rate for USD from the database.
     - / [POST] Create a new rate in the database using the BCV API.
     - /{rate_date} [GET]: Get the rate for a specific date from the database.
+    - /history [GET]: Get the exchange rate history within a date range.
     - /token [POST]: Login endpoint to get a JWT token.
     - /users/me [GET]: Get the current user information.
     """

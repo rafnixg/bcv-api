@@ -9,6 +9,30 @@
 This API is used to get the exchange rate of the BCV (Central Bank of Venezuela).
 This API is a simple REST API that returns the exchange rate of the BCV in JSON format.
 
+## Quick Usage
+
+### Get Latest Rate
+```bash
+curl https://bcv-api.rafnixg.dev/rates/
+```
+
+### Get Rate for Specific Date
+```bash
+curl https://bcv-api.rafnixg.dev/rates/2025-08-20
+```
+
+### Get Rate History (Last 30 Days)
+```bash
+curl https://bcv-api.rafnixg.dev/rates/history
+```
+
+### Get Rate History for Date Range
+```bash
+curl "https://bcv-api.rafnixg.dev/rates/history?start_date=2025-02-15&end_date=2025-03-15"
+```
+
+For complete API documentation visit: [https://bcv-api.rafnixg.dev/docs](https://bcv-api.rafnixg.dev/docs)
+
 ## Installation
 1. Clone the repository and create a `.env` file in the root of the project, use `.env.example` as a template
     Remember to replace the values of the variables with your own values.
