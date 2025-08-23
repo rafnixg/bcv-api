@@ -10,3 +10,9 @@ theme:
     - content.action.edit
 repo_url: https://github.com/rafnixg/bcv-api
 edit_uri: edit/main/docs/
+
+nav:
+  - Home: index.md
+  - Quick Start: quick-start.md
+  - Installation: installation.md
+  - API Reference: api-reference.md
