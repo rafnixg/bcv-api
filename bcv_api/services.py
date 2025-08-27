@@ -11,23 +11,30 @@ from bcv_api.config import settings
 # RATE SERVICES
 
 
-def get_rate(db: Session) -> models.Rate:
-    """Get the last rate from the database.
+def get_rate(db: Session, currency: str = "USD") -> models.Rate:
+    """Get the last rate from the database for a specific currency.
 
     Parameters:
     ----------
     db: Session
         Database session.
+    currency: str
+        Currency code (default: USD).
 
     Returns:
     -------
     models.Rate
     """
-    return db.query(models.Rate).order_by(models.Rate.date.desc()).first()
+    return (
+        db.query(models.Rate)
+        .filter(models.Rate.currency == currency)
+        .order_by(models.Rate.date.desc())
+        .first()
+    )
 
 
-def get_rate_from_date(db: Session, rate_date: date) -> models.Rate:
-    """Get the rate from the database for a specific date.
+def get_rate_from_date(db: Session, rate_date: date, currency: str = "USD") -> models.Rate:
+    """Get the rate from the database for a specific date and currency.
 
     Parameters:
     ----------
@@ -35,6 +42,8 @@ def get_rate_from_date(db: Session, rate_date: date) -> models.Rate:
         Database session.
     rate_date: date
         Rate date.
+    currency: str
+        Currency code (default: USD).
 
     Returns:
     -------
@@ -43,6 +52,7 @@ def get_rate_from_date(db: Session, rate_date: date) -> models.Rate:
     return (
         db.query(models.Rate)
         .filter(models.Rate.date == rate_date)
+        .filter(models.Rate.currency == currency)
         .order_by(models.Rate.id.desc())
         .first()
     )
@@ -67,8 +77,8 @@ def get_rates(db: Session, skip: int = 0, limit: int = 100) -> List[models.Rate]
     return db.query(models.Rate).offset(skip).limit(limit).all()
 
 
-def get_rates_by_date_range(db: Session, start_date: date, end_date: date) -> List[models.Rate]:
-    """Get rates from the database within a date range.
+def get_rates_by_date_range(db: Session, start_date: date, end_date: date, currency: str = "USD") -> List[models.Rate]:
+    """Get rates from the database within a date range for a specific currency.
 
     Parameters:
     ----------
@@ -78,6 +88,8 @@ def get_rates_by_date_range(db: Session, start_date: date, end_date: date) -> Li
         Start date of the range.
     end_date: date
         End date of the range.
+    currency: str
+        Currency code (default: USD).
 
     Returns:
     -------
@@ -87,52 +99,61 @@ def get_rates_by_date_range(db: Session, start_date: date, end_date: date) -> Li
         db.query(models.Rate)
         .filter(models.Rate.date >= start_date)
         .filter(models.Rate.date <= end_date)
+        .filter(models.Rate.currency == currency)
         .order_by(models.Rate.date.desc())
         .all()
     )
 
 
-def create_rate(db: Session, rate: schemas.Rate) -> models.Rate:
+def create_rate(db: Session, rate_value: float, currency: str, rate_date: date) -> models.Rate:
     """Create a new rate in the database.
 
     Parameters:
     ----------
     db: Session
         Database session.
-    rate: schemas.Rate
-        Rate to create.
+    rate_value: float
+        Exchange rate value.
+    currency: str
+        Currency code.
+    rate_date: date
+        Rate date.
 
     Returns:
     -------
     models.Rate
     """
-    db_rate = get_rate_from_date(db, rate.date)
+    db_rate = get_rate_from_date(db, rate_date, currency)
     if db_rate:
-        return update_rate(db, rate)
-    db_rate = models.Rate(dollar=rate.dollar, date=rate.date)
+        return update_rate(db, rate_value, currency, rate_date)
+    db_rate = models.Rate(rate=rate_value, currency=currency, date=rate_date)
     db.add(db_rate)
     db.commit()
     db.refresh(db_rate)
     return db_rate
 
 
-def update_rate(db: Session, rate: schemas.Rate) -> models.Rate:
+def update_rate(db: Session, rate_value: float, currency: str, rate_date: date) -> models.Rate:
     """Update a rate in the database.
 
     Parameters:
     ----------
     db: Session
         Database session.
-    rate: schemas.Rate
-        Rate to update.
+    rate_value: float
+        Exchange rate value.
+    currency: str
+        Currency code.
+    rate_date: date
+        Rate date.
 
     Returns:
     -------
     models.Rate
     """
-    db_rate = get_rate_from_date(db, rate.date)
+    db_rate = get_rate_from_date(db, rate_date, currency)
     if db_rate:
-        db_rate.dollar = rate.dollar
+        db_rate.rate = rate_value
         db.commit()
         db.refresh(db_rate)
     return db_rate
