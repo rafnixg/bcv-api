@@ -1,5 +1,12 @@
 # BCV Exchange Rate API
+
+[![Python](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110.1-009688.svg?logo=fastapi)](https://fastapi.tiangolo.com)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![GitHub stars](https://img.shields.io/github/stars/rafnixg/bcv-api.svg?style=social&label=Star)](https://github.com/rafnixg/bcv-api)
+[![GitHub issues](https://img.shields.io/github/issues/rafnixg/bcv-api.svg)](https://github.com/rafnixg/bcv-api/issues)
 [![Publish Docker Image](https://github.com/rafnixg/bcv-api/actions/workflows/docker-image.yml/badge.svg?branch=main)](https://github.com/rafnixg/bcv-api/actions/workflows/docker-image.yml)
+[![Documentation](https://github.com/rafnixg/bcv-api/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/rafnixg/bcv-api/actions/workflows/docs.yml)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/rafnixg/bcv-api)
 ## Documentation
 
