@@ -12,7 +12,7 @@
 
 [https://rafnixg.github.io/bcv-api/](https://rafnixg.github.io/bcv-api/)
 
-###This API is outdated and the endpoints are down.
+### This API is outdated and the endpoints are down.
 
 If you download the code, it's 100% functional and you can host it on your own server.
 
