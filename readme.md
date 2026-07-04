@@ -12,6 +12,13 @@
 
 [https://rafnixg.github.io/bcv-api/](https://rafnixg.github.io/bcv-api/)
 
+###This API is outdated and the endpoints are down.
+
+If you download the code, it's 100% functional and you can host it on your own server.
+
+For an updated version with more features, Binance dollar exchange rate, and average exchange rate, visit https://dolar-vzla.rafnixg.dev/ and https://dolar-vzla.rafnixg.dev/docs
+
+
 ## Description
 This API is used to get the exchange rate of the BCV (Central Bank of Venezuela).
 This API is a simple REST API that returns the exchange rate of the BCV in JSON format.
