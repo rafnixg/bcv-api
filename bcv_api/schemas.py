@@ -1,14 +1,15 @@
 """Schemas for the API."""
 
-from datetime import date
-from typing import List
+from datetime import date, datetime
+from typing import List, Optional
 from pydantic import BaseModel
 
 
 class ExchangeRate(BaseModel):
-    """Exchange rate for USD."""
+    """Exchange rate for a currency."""
 
-    dollar: float
+    rate: float
+    currency: str
     date: date
 
 
@@ -28,9 +29,11 @@ class User(BaseModel):
     is_active: bool
     api_key: str
     id: int
+    create_date: Optional[datetime] = None
+    update_date: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class UserCreate(BaseModel):
@@ -43,12 +46,15 @@ class UserCreate(BaseModel):
 class Rate(BaseModel):
     """Rate model."""
 
-    dollar: float
+    rate: float
+    currency: str
     date: date
     id: int
+    create_date: Optional[datetime] = None
+    update_date: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class Token(BaseModel):
